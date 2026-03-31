@@ -67,13 +67,11 @@
         </div>
 
         <div class="hero-media" aria-label="Video principal de Michel Fontanet">
-          <video autoplay muted loop playsinline poster="assets/hero-poster.jpg">
-            <source src="assets/hero-video.mp4" type="video/mp4" />
-          </video>
-          <div class="media-overlay">
-            <strong>Video principal</strong>
-            <p>Reemplazá <code>assets/hero-video.mp4</code> por el video vertical final.</p>
-          </div>
+  <video controls playsinline poster="assets/hero-poster.jpg">
+    <source src="assets/hero-video.mp4" type="video/mp4" />
+    Tu navegador no soporta video HTML5.
+  </video>
+</div>
         </div>
       </div>
     </section>
@@ -171,9 +169,16 @@
           </article>
 
           <article class="media-card">
-            <h3>YouTube</h3>
-            <iframe class="embed" src="https://www.youtube.com/watch?v=7-7O1BpLq7E" title="Video de Michel Fontanet en YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </article>
+  <h3>YouTube</h3>
+  <a href="https://www.youtube.com/watch?v=7-7O1BpLq7E" target="_blank" rel="noopener noreferrer" style="display:block; margin-top:18px;">
+    <img
+      class="embed"
+      src="https://img.youtube.com/vi/7-7O1BpLq7E/maxresdefault.jpg"
+      alt="Video de Michel Fontanet en YouTube"
+      style="object-fit:cover;"
+    />
+  </a>
+</article>
         </div>
       </div>
     </section>
