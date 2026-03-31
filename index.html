@@ -14,6 +14,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+  <script>
+  function setupCopy(buttonId, textId, successText, defaultText) {
+    const button = document.getElementById(buttonId);
+    const text = document.getElementById(textId);
+
+    if (!button || !text) return;
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text.textContent.trim());
+        button.textContent = successText;
+        button.classList.add('is-copied');
+
+        setTimeout(() => {
+          button.textContent = defaultText;
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (error) {
+        button.textContent = 'No se pudo copiar';
+        setTimeout(() => {
+          button.textContent = defaultText;
+        }, 1800);
+      }
+    });
+  }
+
+  setupCopy('copyAliasBtn', 'aliasText', 'Alias copiado', 'Copiar alias');
+  setupCopy('copyCbuBtn', 'cbuText', 'CBU copiado', 'Copiar CBU');
+</script>
 <body>
   <header class="nav">
     <div class="container nav-inner">
@@ -60,9 +89,22 @@
             </div>
 
             <div class="alias">
-              Alias para transferencias
-              <strong>michelf.97</strong>
-            </div>
+  <div style="margin-bottom: 12px;">
+    <small style="color:#b8bfcd; font-size:13px;">Alias para transferencias</small>
+    <div class="alias-row">
+      <strong id="aliasText">michelf.97</strong>
+      <button class="copy-btn" id="copyAliasBtn" type="button">Copiar alias</button>
+    </div>
+  </div>
+
+  <div>
+    <small style="color:#b8bfcd; font-size:13px;">CBU</small>
+    <div class="alias-row">
+      <strong id="cbuText">0070089430004291555316</strong>
+      <button class="copy-btn" id="copyCbuBtn" type="button">Copiar CBU</button>
+    </div>
+  </div>
+</div>
           </div>
         </div>
 
@@ -72,7 +114,6 @@
     Tu navegador no soporta video HTML5.
   </video>
 </div>
-        </div>
       </div>
     </section>
 
