@@ -400,3 +400,51 @@ code {
   color: #7ad7ff;
   border-color: rgba(0,158,227,.35);
 }
+.alias-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.copy-btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.1);
+}
+
+.copy-btn.is-copied {
+  background: rgba(0,158,227,.16);
+  color: #7ad7ff;
+  border-color: rgba(0,158,227,.35);
+}
+
+@media (max-width: 760px) {
+  .alias-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .copy-btn {
+    width: auto;
+  }
+
+  .alias-row strong {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}
