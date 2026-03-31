@@ -15,69 +15,63 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
   <script>
-  function fallbackCopyText(text) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.setAttribute('readonly', '');
-    textArea.style.position = 'absolute';
-    textArea.style.left = '-9999px';
-    document.body.appendChild(textArea);
-    textArea.select();
-    textArea.setSelectionRange(0, 99999);
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.pointerEvents = 'none';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    textarea.setSelectionRange(0, 99999);
 
-    let success = false;
+    let ok = false;
     try {
-      success = document.execCommand('copy');
-    } catch (err) {
-      success = false;
+      ok = document.execCommand('copy');
+    } catch (e) {
+      ok = false;
     }
 
-    document.body.removeChild(textArea);
-    return success;
+    document.body.removeChild(textarea);
+    return ok;
   }
 
-  async function copyText(text) {
+  async function copyField(textId, button, successText, defaultText) {
+    const el = document.getElementById(textId);
+    if (!el) return;
+
+    const value = el.textContent.trim();
+    let copied = false;
+
     if (navigator.clipboard && window.isSecureContext) {
       try {
-        await navigator.clipboard.writeText(text);
-        return true;
-      } catch (err) {
-        return fallbackCopyText(text);
+        await navigator.clipboard.writeText(value);
+        copied = true;
+      } catch (e) {
+        copied = fallbackCopy(value);
       }
+    } else {
+      copied = fallbackCopy(value);
     }
-    return fallbackCopyText(text);
+
+    if (copied) {
+      const old = button.textContent;
+      button.textContent = successText;
+      button.classList.add('is-copied');
+
+      setTimeout(() => {
+        button.textContent = defaultText || old;
+        button.classList.remove('is-copied');
+      }, 1800);
+    } else {
+      button.textContent = 'No se pudo copiar';
+      setTimeout(() => {
+        button.textContent = defaultText;
+      }, 1800);
+    }
   }
-
-  function setupCopy(buttonId, textId, successText, defaultText) {
-    const button = document.getElementById(buttonId);
-    const textElement = document.getElementById(textId);
-
-    if (!button || !textElement) return;
-
-    button.addEventListener('click', async () => {
-      const value = textElement.textContent.trim();
-      const copied = await copyText(value);
-
-      if (copied) {
-        button.textContent = successText;
-        button.classList.add('is-copied');
-
-        setTimeout(() => {
-          button.textContent = defaultText;
-          button.classList.remove('is-copied');
-        }, 1800);
-      } else {
-        button.textContent = 'No se pudo copiar';
-
-        setTimeout(() => {
-          button.textContent = defaultText;
-        }, 1800);
-      }
-    });
-  }
-
-  setupCopy('copyAliasBtn', 'aliasText', 'Alias copiado', 'Copiar alias');
-  setupCopy('copyCbuBtn', 'cbuText', 'CBU copiado', 'Copiar CBU');
 </script>
 <body>
   <header class="nav">
@@ -132,7 +126,7 @@
 
     <div class="alias-row">
       <strong id="aliasText">michelf.97</strong>
-      <button class="copy-btn" id="copyAliasBtn" type="button">Copiar alias</button>
+      <button class="copy-btn" type="button" onclick="copyField('aliasText', this, 'Alias copiado', 'Copiar alias')">Copiar alias</button>
     </div>
   </div>
 
@@ -143,7 +137,7 @@
 
     <div class="alias-row">
       <strong id="cbuText">0070089430004291555316</strong>
-      <button class="copy-btn" id="copyCbuBtn" type="button">Copiar CBU</button>
+     <button class="copy-btn" type="button" onclick="copyField('cbuText', this, 'CBU copiado', 'Copiar CBU')">Copiar CBU</button>
     </div>
   </div>
 </div>
