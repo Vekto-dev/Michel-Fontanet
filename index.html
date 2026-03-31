@@ -12,7 +12,414 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --bg: #0b0b0e;
+      --bg-soft: #14161d;
+      --panel: rgba(255,255,255,.05);
+      --panel-2: rgba(255,255,255,.07);
+      --line: rgba(255,255,255,.12);
+      --text: #f5f7fb;
+      --muted: #b8bfcd;
+      --accent: #ffffff;
+      --shadow: 0 20px 60px rgba(0,0,0,.34);
+      --radius: 24px;
+      --max: 1180px;
+      --mp: #009ee3;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(88,110,255,.10), transparent 26%),
+        linear-gradient(180deg, #0b0b0e 0%, #101218 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, p { margin: 0; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(11,11,14,.65);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .btn, .btn-secondary, .amount-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      transition: .2s ease;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      background: var(--accent);
+      color: #0b0b0e;
+      box-shadow: var(--shadow);
+      border: 1px solid transparent;
+    }
+
+    .btn-secondary {
+      padding: 14px 20px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn:hover, .btn-secondary:hover, .amount-btn:hover, .link-card:hover { transform: translateY(-2px); }
+
+    .hero {
+      padding: 56px 0 26px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-copy, .hero-media, .story-card, .link-card, .media-card, .footer-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 620px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #d7deed;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: .96;
+      letter-spacing: -.06em;
+      margin-bottom: 16px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+      margin-bottom: 24px;
+      max-width: 56ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .donation-box {
+      margin-top: 6px;
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+    }
+
+    .donation-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .mp-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,158,227,.16);
+      color: #7ad7ff;
+      border: 1px solid rgba(0,158,227,.35);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .donation-box p {
+      color: var(--muted);
+    }
+
+    .amounts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 18px 0 14px;
+    }
+
+    .amount-btn {
+      padding: 15px 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-align: center;
+    }
+
+    .alias {
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .alias strong {
+      color: var(--text);
+      display: block;
+      margin-top: 4px;
+      font-size: 16px;
+    }
+
+    .alias-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .copy-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.1);
+    }
+
+    .copy-btn.is-copied {
+      background: rgba(0,158,227,.16);
+      color: #7ad7ff;
+      border-color: rgba(0,158,227,.35);
+    }
+
+    .hero-media {
+      overflow: hidden;
+      min-height: 620px;
+      position: relative;
+    }
+
+    .hero-media img, .hero-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-overlay {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.7));
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .section { padding: 26px 0; }
+
+    .section-head {
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .story-card, .media-card {
+      padding: 28px;
+    }
+
+    .story-card p, .media-card p, .link-card p, .footer-box p {
+      color: var(--muted);
+    }
+
+    .bio-frame {
+      width: 100%;
+      min-height: 760px;
+      border: 0;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      margin-top: 18px;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .link-card {
+      padding: 22px;
+      min-height: 154px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: .2s ease;
+    }
+
+    .link-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      font-size: 18px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .embed {
+      width: 100%;
+      height: 352px;
+      border: 0;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      margin-top: 18px;
+    }
+
+    .footer {
+      padding: 28px 0 48px;
+    }
+
+    .footer-box {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    @media (max-width: 1060px) {
+      .hero-grid,
+      .media-grid,
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-media {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 28px; }
+      .hero-copy, .story-card, .media-card, .footer-box { padding: 22px; }
+      .amounts { grid-template-columns: 1fr; }
+      .footer-box {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="nav">
@@ -61,17 +468,20 @@
 
             <div class="alias">
               Alias para transferencias
-              <strong>michelf.97</strong>
+              <div class="alias-row">
+                <strong id="aliasText">michelf.97</strong>
+                <button class="copy-btn" id="copyAliasBtn" type="button">Copiar alias</button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="hero-media" aria-label="Video principal de Michel Fontanet">
-  <video controls playsinline poster="assets/hero-poster.jpg">
-    <source src="assets/hero-video.mp4" type="video/mp4" />
-    Tu navegador no soporta video HTML5.
-  </video>
-</div>
+        <div class="hero-media" aria-label="Video principal o imagen destacada">
+          <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1400&q=80" alt="Michel Fontanet en una presentación" />
+          <div class="media-overlay">
+            <strong>Video principal</strong>
+            <p>Reemplazá esta imagen por el video vertical real que compartiste para abrir la página con más impacto.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -80,23 +490,21 @@
       <div class="container">
         <div class="section-head">
           <h2>Conocé a Michel</h2>
-          <p>Un resumen directo de su recorrido, su formación y el motivo concreto de esta colecta.</p>
+          <p>La biografía vive acá, sin relleno. Esta sección puede mostrar directamente el contenido que ya prepararon.</p>
         </div>
 
         <article class="story-card">
-          <h3>Sobre mí</h3>
-          <p style="margin-top:12px;">Mi nombre es Michel Fontanet, tengo 28 años y soy pianista, docente y tucumano.</p>
+  <h3>Sobre mí</h3>
+  <p style="margin-top:12px;">Mi nombre es Michel Fontanet, tengo 28 años y soy pianista, docente y tucumano.</p>
 
-          <p style="margin-top:12px;">Me dedico a la música desde los 12 años. Crecí rodeado de distintos géneros musicales y empecé mi camino con la guitarra gracias a mi tía Nora. Desde entonces pasé por clases, talleres y bandas de estilos muy distintos, desde el metal hasta la cumbia, además de la música coral.</p>
+  <p style="margin-top:12px;">Comencé de manera autodidacta con la guitarra, luego estudié guitarra clásica durante dos años y finalmente ingresé al profesorado de música con orientación en dirección coral. Con el tiempo, el piano se convirtió en mi instrumento principal de una forma inesperada, descubriendo en él una conexión más profunda con la música.</p>
 
-          <p style="margin-top:12px;">En 2020 me mudé a Mendoza para estudiar en la Universidad Nacional de Cuyo. Poco después comenzó la cuarentena. A principios de 2022 volví a Tucumán, donde reconstruí mi vida con el apoyo de mi familia y mis amigos.</p>
+  <p style="margin-top:12px;">A lo largo de mi carrera dirigí agrupaciones corales y trabajé como arreglista y director musical en distintos proyectos de la escena tucumana, participando junto a artistas como Joaquín Silva, Maze 2k y M4X.</p>
 
-          <p style="margin-top:12px;">Con el tiempo, el piano se convirtió en mi instrumento principal. A lo largo de mi recorrido dirigí agrupaciones corales y trabajé como arreglista y director musical en proyectos de la escena tucumana, junto a artistas como Joaquín Silva, Maze 2k y M4X.</p>
+  <p style="margin-top:12px;">Tuve la oportunidad de presentarme en escenarios como el Teatro Municipal Rosita Ávila, el Partido Justicialista y el festival Tucumán Urban Indie. Actualmente soy docente y continúo desarrollándome en la dirección musical y la coautoría de canciones.</p>
 
-          <p style="margin-top:12px;">Hoy gané una beca para el programa <strong>“Tu Experiencia Broadway”</strong>, organizado por Musicate B, y fui seleccionado entre más de 2.000 participantes de todo el continente. Para poder concretarlo necesito recaudar fondos para viaje, estadía, seguros médicos y formación.</p>
-
-          <p style="margin-top:16px; color:#d7deed;">Representar a Tucumán en esta experiencia significa muchísimo para mí. Este espacio reúne mi historia, mi trabajo y una manera directa de acompañar este camino.</p>
-        </article>
+  <p style="margin-top:16px; color:#d7deed;">Este espacio reúne mi recorrido, mi trabajo y una forma directa de acompañar este camino.</p>
+</article>
       </div>
     </section>
 
@@ -159,7 +567,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Música y contenido</h2>
-          <p>Spotify y YouTube integrados directamente.</p>
+          <p>Un embed de Spotify y el video de YouTube, sin bloques extra.</p>
         </div>
 
         <div class="media-grid">
@@ -169,16 +577,9 @@
           </article>
 
           <article class="media-card">
-  <h3>YouTube</h3>
-  <a href="https://www.youtube.com/watch?v=7-7O1BpLq7E" target="_blank" rel="noopener noreferrer" style="display:block; margin-top:18px;">
-    <img
-      class="embed"
-      src="https://img.youtube.com/vi/7-7O1BpLq7E/maxresdefault.jpg"
-      alt="Video de Michel Fontanet en YouTube"
-      style="object-fit:cover;"
-    />
-  </a>
-</article>
+            <h3>YouTube</h3>
+            <iframe class="embed" src="https://www.youtube.com/embed/7-7O1BpLq7E" title="Video de Michel Fontanet en YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </article>
         </div>
       </div>
     </section>
@@ -195,5 +596,32 @@
       </div>
     </div>
   </footer>
+  <script>
+    const copyAliasBtn = document.getElementById('copyAliasBtn');
+    const aliasText = document.getElementById('aliasText');
+
+    if (copyAliasBtn && aliasText) {
+      copyAliasBtn.addEventListener('click', async () => {
+        const alias = aliasText.textContent.trim();
+
+        try {
+          await navigator.clipboard.writeText(alias);
+          const originalText = copyAliasBtn.textContent;
+          copyAliasBtn.textContent = 'Alias copiado';
+          copyAliasBtn.classList.add('is-copied');
+
+          setTimeout(() => {
+            copyAliasBtn.textContent = originalText;
+            copyAliasBtn.classList.remove('is-copied');
+          }, 1800);
+        } catch (error) {
+          copyAliasBtn.textContent = 'No se pudo copiar';
+          setTimeout(() => {
+            copyAliasBtn.textContent = 'Copiar alias';
+          }, 1800);
+        }
+      });
+    }
+  </script>
 </body>
 </html>
