@@ -14,6 +14,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+  <script>
+  const copyAliasBtn = document.getElementById('copyAliasBtn');
+  const aliasText = document.getElementById('aliasText');
+
+  if (copyAliasBtn && aliasText) {
+    copyAliasBtn.addEventListener('click', async () => {
+      const alias = aliasText.textContent.trim();
+
+      try {
+        await navigator.clipboard.writeText(alias);
+        const originalText = copyAliasBtn.textContent;
+        copyAliasBtn.textContent = 'Alias copiado';
+        copyAliasBtn.classList.add('is-copied');
+
+        setTimeout(() => {
+          copyAliasBtn.textContent = originalText;
+          copyAliasBtn.classList.remove('is-copied');
+        }, 1800);
+      } catch (error) {
+        copyAliasBtn.textContent = 'No se pudo copiar';
+        setTimeout(() => {
+          copyAliasBtn.textContent = 'Copiar alias';
+        }, 1800);
+      }
+    });
+  }
+</script>
+
+<!-- 👇 PEGA ESTO JUSTO ACÁ ABAJO -->
+
+<script>
+  const copyCbuBtn = document.getElementById('copyCbuBtn');
+  const cbuText = document.getElementById('cbuText');
+
+  if (copyCbuBtn && cbuText) {
+    copyCbuBtn.addEventListener('click', async () => {
+      const cbu = cbuText.textContent.trim();
+
+      try {
+        await navigator.clipboard.writeText(cbu);
+
+        const originalText = copyCbuBtn.textContent;
+        copyCbuBtn.textContent = 'CBU copiado';
+        copyCbuBtn.classList.add('is-copied');
+
+        setTimeout(() => {
+          copyCbuBtn.textContent = originalText;
+          copyCbuBtn.classList.remove('is-copied');
+        }, 1800);
+
+      } catch (error) {
+        copyCbuBtn.textContent = 'Error';
+        setTimeout(() => {
+          copyCbuBtn.textContent = 'Copiar CBU';
+        }, 1800);
+      }
+    });
+  }
+</script>
+
+</body>
 <body>
   <header class="nav">
     <div class="container nav-inner">
@@ -60,10 +121,21 @@
             </div>
 
             <div class="alias">
-              Alias para transferencias
-              <strong>michelf.97</strong>
-            </div>
-          </div>
+  Alias para transferencias
+
+  <div class="alias-row">
+    <strong id="aliasText">michelf.97</strong>
+    <button class="copy-btn" id="copyAliasBtn" type="button">Copiar alias</button>
+  </div>
+
+  <div class="alias-row" style="margin-top:10px;">
+    <div>
+      <small style="color:#b8bfcd; font-size:13px;">CBU</small>
+      <strong id="cbuText">0070089430004291555316</strong>
+    </div>
+    <button class="copy-btn" id="copyCbuBtn" type="button">Copiar CBU</button>
+  </div>
+</div>
         </div>
 
         <div class="hero-media" aria-label="Video principal de Michel Fontanet">
@@ -195,5 +267,5 @@
       </div>
     </div>
   </footer>
-</body>
+</>
 </html>
