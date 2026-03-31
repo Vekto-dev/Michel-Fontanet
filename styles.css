@@ -329,15 +329,59 @@ h1 {
 }
 
 .footer {
-  padding: 28px 0 48px;
+  position: relative;
+  padding: 56px 0 48px;
+  margin-top: 28px;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.02) 35%,
+    rgba(255,255,255,0.05) 100%
+  );
+  pointer-events: none;
 }
 
 .footer-box {
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  position: relative;
+  padding: 28px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,.03)
+  );
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.footer-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255,255,255,.08),
+    transparent 38%
+  );
+  pointer-events: none;
+}
+
+.footer-box h3,
+.footer-box p {
+  position: relative;
+  z-index: 1;
 }
 
 code {
