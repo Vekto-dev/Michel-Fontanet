@@ -1,29 +1,269 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gracias por tu apoyo</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gracias por tu apoyo | Michel Fontanet</title>
+  <meta name="description" content="Gracias por apoyar a Michel Fontanet. Tu aporte ayuda a hacer posible esta experiencia." />
+  <meta name="theme-color" content="#0b0b0e" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0b0e;
+      --panel: rgba(15, 18, 24, 0.72);
+      --panel-line: rgba(255,255,255,.12);
+      --text: #f5f7fb;
+      --muted: #b8bfcd;
+      --accent: #ffffff;
+      --accent-soft: #d7deed;
+      --shadow: 0 20px 60px rgba(0,0,0,.38);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8,10,14,.72) 0%, rgba(8,10,14,.88) 100%),
+        url("assets/hero-poster.jpg") center center / cover no-repeat;
+      filter: blur(12px) saturate(1.05);
+      transform: scale(1.08);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(88,110,255,.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,.06), transparent 18%);
+      z-index: -1;
+    }
+
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 760px;
+      padding: 42px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--panel-line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: var(--accent-soft);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: .98;
+      letter-spacing: -.06em;
+    }
+
+    .lead {
+      margin: 18px auto 0;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.65;
+    }
+
+    .message {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--accent-soft);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: .2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #0b0b0e;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .btn:hover,
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .foot {
+      margin-top: 22px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .copied {
+      margin-top: 12px;
+      min-height: 22px;
+      font-size: 14px;
+      color: #7ad7ff;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 18px;
+      }
+
+      .card {
+        padding: 28px 22px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn,
+      .btn-secondary {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
 </head>
-<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; text-align:center;">
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="eyebrow">Gracias por acompañar este camino</div>
 
-  <div style="max-width:600px; padding:40px;">
-    <h1>Gracias por tu apoyo</h1>
+      <h1>Gracias por tu apoyo</h1>
 
-    <p style="margin-top:16px; color:#b8bfcd;">
-      Tu aporte hace posible que Michel pueda cumplir este objetivo y representar su trabajo en Broadway.
-    </p>
+      <p class="lead">
+        Tu aporte ayuda a que Michel pueda avanzar en esta oportunidad y acercarse a una experiencia que representa muchísimo a nivel personal, artístico y profesional.
+      </p>
 
-    <p style="margin-top:16px; color:#b8bfcd;">
-      Si querés ayudar aún más, podés compartir esta página.
-    </p>
+      <div class="message">
+        Cada colaboración suma. Y si además compartís esta página, ayudas a que más personas conozcan su historia y puedan acompañarlo también.
+      </div>
 
-    <div style="margin-top:24px;">
-      <a href="/" class="btn">Volver al inicio</a>
-    </div>
+      <div class="actions">
+        <a class="btn" href="./index.html">Volver al inicio</a>
+        <button class="btn-secondary" id="shareBtn" type="button">Compartir esta página</button>
+      </div>
 
-  </div>
+      <div class="copied" id="shareStatus"></div>
 
+      <p class="foot">
+        Tu apoyo suma más de lo que imaginás.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const shareBtn = document.getElementById('shareBtn');
+    const shareStatus = document.getElementById('shareStatus');
+
+    async function sharePage() {
+      const shareUrl = window.location.origin + '/index.html';
+      const shareData = {
+        title: 'Michel Fontanet',
+        text: 'Estoy apoyando a Michel Fontanet para que pueda concretar esta oportunidad. Mira su historia y su página aquí:',
+        url: shareUrl
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          shareStatus.textContent = 'Gracias por compartir.';
+          setTimeout(() => {
+            shareStatus.textContent = '';
+          }, 2200);
+          return;
+        }
+
+        await navigator.clipboard.writeText(shareUrl);
+        shareStatus.textContent = 'Link copiado al portapapeles.';
+        setTimeout(() => {
+          shareStatus.textContent = '';
+        }, 2200);
+      } catch (error) {
+        shareStatus.textContent = 'No se pudo compartir automáticamente.';
+        setTimeout(() => {
+          shareStatus.textContent = '';
+        }, 2200);
+      }
+    }
+
+    shareBtn.addEventListener('click', sharePage);
+  </script>
 </body>
 </html>
