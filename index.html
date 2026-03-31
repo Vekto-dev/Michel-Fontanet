@@ -15,15 +15,50 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
   <script>
+  function fallbackCopyText(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'absolute';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    textArea.setSelectionRange(0, 99999);
+
+    let success = false;
+    try {
+      success = document.execCommand('copy');
+    } catch (err) {
+      success = false;
+    }
+
+    document.body.removeChild(textArea);
+    return success;
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        return fallbackCopyText(text);
+      }
+    }
+    return fallbackCopyText(text);
+  }
+
   function setupCopy(buttonId, textId, successText, defaultText) {
     const button = document.getElementById(buttonId);
-    const text = document.getElementById(textId);
+    const textElement = document.getElementById(textId);
 
-    if (!button || !text) return;
+    if (!button || !textElement) return;
 
     button.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(text.textContent.trim());
+      const value = textElement.textContent.trim();
+      const copied = await copyText(value);
+
+      if (copied) {
         button.textContent = successText;
         button.classList.add('is-copied');
 
@@ -31,8 +66,9 @@
           button.textContent = defaultText;
           button.classList.remove('is-copied');
         }, 1800);
-      } catch (error) {
+      } else {
         button.textContent = 'No se pudo copiar';
+
         setTimeout(() => {
           button.textContent = defaultText;
         }, 1800);
@@ -88,9 +124,12 @@
               <a class="amount-btn" href="REEMPLAZAR_LINK_MP_OTRO_MONTO" target="_blank" rel="noopener noreferrer">Otro monto</a>
             </div>
 
-            <div class="alias">
-  <div style="margin-bottom: 12px;">
-    <small style="color:#b8bfcd; font-size:13px;">Alias para transferencias</small>
+       <div class="alias">
+  <div style="margin-bottom: 14px;">
+    <small style="color:#b8bfcd; font-size:13px; display:block; margin-bottom:6px;">
+      Alias para transferencias
+    </small>
+
     <div class="alias-row">
       <strong id="aliasText">michelf.97</strong>
       <button class="copy-btn" id="copyAliasBtn" type="button">Copiar alias</button>
@@ -98,7 +137,10 @@
   </div>
 
   <div>
-    <small style="color:#b8bfcd; font-size:13px;">CBU</small>
+    <small style="color:#b8bfcd; font-size:13px; display:block; margin-bottom:6px;">
+      CBU
+    </small>
+
     <div class="alias-row">
       <strong id="cbuText">0070089430004291555316</strong>
       <button class="copy-btn" id="copyCbuBtn" type="button">Copiar CBU</button>
