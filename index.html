@@ -6,7 +6,7 @@
   <title>Michel Fontanet | Pianista y director musical</title>
   <meta name="description" content="Conocé a Michel Fontanet, pianista y director musical. Descubrí su historia, su contenido y apoyá su camino con un donativo directo." />
   <meta property="og:title" content="Michel Fontanet | Pianista y director musical" />
-  <meta property="og:description" content="Historia, contenido, plataformas oficiales y donativos directos para apoyar el camino de Michel Fontanet." />
+  <meta property="og:description" content="Historia, plataformas oficiales y donativos directos para apoyar el camino de Michel Fontanet." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b0b0e" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,65 +14,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-  <script>
-  function fallbackCopy(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    textarea.style.pointerEvents = 'none';
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-    textarea.setSelectionRange(0, 99999);
-
-    let ok = false;
-    try {
-      ok = document.execCommand('copy');
-    } catch (e) {
-      ok = false;
-    }
-
-    document.body.removeChild(textarea);
-    return ok;
-  }
-
-  async function copyField(textId, button, successText, defaultText) {
-    const el = document.getElementById(textId);
-    if (!el) return;
-
-    const value = el.textContent.trim();
-    let copied = false;
-
-    if (navigator.clipboard && window.isSecureContext) {
-      try {
-        await navigator.clipboard.writeText(value);
-        copied = true;
-      } catch (e) {
-        copied = fallbackCopy(value);
-      }
-    } else {
-      copied = fallbackCopy(value);
-    }
-
-    if (copied) {
-      const old = button.textContent;
-      button.textContent = successText;
-      button.classList.add('is-copied');
-
-      setTimeout(() => {
-        button.textContent = defaultText || old;
-        button.classList.remove('is-copied');
-      }, 1800);
-    } else {
-      button.textContent = 'No se pudo copiar';
-      setTimeout(() => {
-        button.textContent = defaultText;
-      }, 1800);
-    }
-  }
-</script>
 <body>
   <header class="nav">
     <div class="container nav-inner">
@@ -90,14 +31,21 @@
       <a class="btn" href="#donar">Donar</a>
     </div>
   </header>
- 
+
   <main>
     <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div class="hero-copy">
           <span class="eyebrow">Pianista · Director musical</span>
+
           <h1>Conocé a Michel. Apoyá su camino.</h1>
-          <p class="lead">Michel es pianista y director musical. Fue seleccionado entre más de 2.000 postulantes para el programa <strong>“Tu Experiencia Broadway”</strong>. Para concretarlo necesita cubrir viaje, estadía, seguros y formación. Esta página concentra su historia y permite colaborar de forma directa.</p>
+
+          <p class="lead">
+            Michel es pianista y director musical. Fue seleccionado entre más de 2.000 postulantes
+            para el programa <strong>“Tu Experiencia Broadway”</strong>. Para concretarlo necesita
+            cubrir viaje, estadía, seguros y formación. Esta página concentra su historia y permite
+            colaborar de forma directa.
+          </p>
 
           <div class="hero-actions">
             <a class="btn" href="#donar">Donar ahora</a>
@@ -109,6 +57,7 @@
               <span class="mp-logo">Mercado Pago</span>
               <strong>Donativo directo</strong>
             </div>
+
             <p>Elegí un monto o dejá uno personalizado.</p>
 
             <div class="amounts">
@@ -118,38 +67,42 @@
               <a class="amount-btn" href="REEMPLAZAR_LINK_MP_OTRO_MONTO" target="_blank" rel="noopener noreferrer">Otro monto</a>
             </div>
 
-       <div class="alias">
-  <div style="margin-bottom: 14px;">
-    <small style="color:#b8bfcd; font-size:13px; display:block; margin-bottom:6px;">
-      Alias para transferencias
-    </small>
+            <div class="alias">
+              <div style="margin-bottom: 14px;">
+                <small style="color:#b8bfcd; font-size:13px; display:block; margin-bottom:6px;">
+                  Alias para transferencias
+                </small>
 
-    <div class="alias-row">
-      <strong id="aliasText">michelf.97</strong>
-      <button class="copy-btn" type="button" onclick="copyField('aliasText', this, 'Alias copiado', 'Copiar alias')">Copiar alias</button>
-    </div>
-  </div>
+                <div class="alias-row">
+                  <strong id="aliasText">michelf.97</strong>
+                  <button class="copy-btn" type="button" onclick="copyField('aliasText', this, 'Alias copiado', 'Copiar alias')">
+                    Copiar alias
+                  </button>
+                </div>
+              </div>
 
-  <div>
-    <small style="color:#b8bfcd; font-size:13px; display:block; margin-bottom:6px;">
-      CBU
-    </small>
+              <div>
+                <small style="color:#b8bfcd; font-size:13px; display:block; margin-bottom:6px;">
+                  CBU
+                </small>
 
-    <div class="alias-row">
-      <strong id="cbuText">0070089430004291555316</strong>
-     <button class="copy-btn" type="button" onclick="copyField('cbuText', this, 'CBU copiado', 'Copiar CBU')">Copiar CBU</button>
-    </div>
-  </div>
-</div>
+                <div class="alias-row">
+                  <strong id="cbuText">0070089430004291555316</strong>
+                  <button class="copy-btn" type="button" onclick="copyField('cbuText', this, 'CBU copiado', 'Copiar CBU')">
+                    Copiar CBU
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="hero-media" aria-label="Video principal de Michel Fontanet">
-  <video controls playsinline poster="assets/hero-poster.jpg">
-    <source src="assets/hero-video.mp4" type="video/mp4" />
-    Tu navegador no soporta video HTML5.
-  </video>
-</div>
+          <video controls playsinline poster="assets/hero-poster.jpg">
+            <source src="assets/hero-video.mp4" type="video/mp4" />
+            Tu navegador no soporta video HTML5.
+          </video>
+        </div>
       </div>
     </section>
 
@@ -162,17 +115,39 @@
 
         <article class="story-card">
           <h3>Sobre mí</h3>
-          <p style="margin-top:12px;">Mi nombre es Michel Fontanet, tengo 28 años y soy pianista, docente y tucumano.</p>
 
-          <p style="margin-top:12px;">Me dedico a la música desde los 12 años. Crecí rodeado de distintos géneros musicales y empecé mi camino con la guitarra gracias a mi tía Nora. Desde entonces pasé por clases, talleres y bandas de estilos muy distintos, desde el metal hasta la cumbia, además de la música coral.</p>
+          <p style="margin-top:12px;">
+            Mi nombre es Michel Fontanet, tengo 28 años y soy pianista, docente y tucumano.
+          </p>
 
-          <p style="margin-top:12px;">En 2020 me mudé a Mendoza para estudiar en la Universidad Nacional de Cuyo. Poco después comenzó la cuarentena. A principios de 2022 volví a Tucumán, donde reconstruí mi vida con el apoyo de mi familia y mis amigos.</p>
+          <p style="margin-top:12px;">
+            Me dedico a la música desde los 12 años. Crecí rodeado de distintos géneros musicales
+            y empecé mi camino con la guitarra gracias a mi tía Nora. Desde entonces pasé por clases,
+            talleres y bandas de estilos muy distintos, desde el metal hasta la cumbia, además de la música coral.
+          </p>
 
-          <p style="margin-top:12px;">Con el tiempo, el piano se convirtió en mi instrumento principal. A lo largo de mi recorrido dirigí agrupaciones corales y trabajé como arreglista y director musical en proyectos de la escena tucumana, junto a artistas como Joaquín Silva, Maze 2k y M4X.</p>
+          <p style="margin-top:12px;">
+            En 2020 me mudé a Mendoza para estudiar en la Universidad Nacional de Cuyo. Poco después
+            comenzó la cuarentena. A principios de 2022 volví a Tucumán, donde reconstruí mi vida
+            con el apoyo de mi familia y mis amigos.
+          </p>
 
-          <p style="margin-top:12px;">Hoy gané una beca para el programa <strong>“Tu Experiencia Broadway”</strong>, organizado por Musicate B, y fui seleccionado entre más de 2.000 participantes de todo el continente. Para poder concretarlo necesito recaudar fondos para viaje, estadía, seguros médicos y formación.</p>
+          <p style="margin-top:12px;">
+            Con el tiempo, el piano se convirtió en mi instrumento principal. A lo largo de mi recorrido
+            dirigí agrupaciones corales y trabajé como arreglista y director musical en proyectos de la
+            escena tucumana, junto a artistas como Joaquín Silva, Maze 2k y M4X.
+          </p>
 
-          <p style="margin-top:16px; color:#d7deed;">Representar a Tucumán en esta experiencia significa muchísimo para mí. Este espacio reúne mi historia, mi trabajo y una manera directa de acompañar este camino.</p>
+          <p style="margin-top:12px;">
+            Hoy gané una beca para el programa <strong>“Tu Experiencia Broadway”</strong>, organizado
+            por Musicate B, y fui seleccionado entre más de 2.000 participantes de todo el continente.
+            Para poder concretarlo necesito recaudar fondos para viaje, estadía, seguros médicos y formación.
+          </p>
+
+          <p style="margin-top:16px; color:#d7deed;">
+            Representar a Tucumán en esta experiencia significa muchísimo para mí. Este espacio reúne
+            mi historia, mi trabajo y una manera directa de acompañar este camino.
+          </p>
         </article>
       </div>
     </section>
@@ -189,7 +164,7 @@
             <div class="link-top">
               <div>
                 <h3>Instagram</h3>
-                <p>Visita mi instagram</p>
+                <p>Visita mi Instagram</p>
               </div>
               <span class="icon">◎</span>
             </div>
@@ -222,7 +197,7 @@
             <div class="link-top">
               <div>
                 <h3>Contrataciones</h3>
-                <p>Whatsapp</p>
+                <p>WhatsApp</p>
               </div>
               <span class="icon">✦</span>
             </div>
@@ -242,48 +217,112 @@
         <div class="media-grid">
           <article class="media-card">
             <h3>Spotify</h3>
-            <iframe class="embed" src="https://open.spotify.com/embed/playlist/4WiFq0QFPIY9cWhhTAOD5i?utm_source=generator" title="Spotify de Michel Fontanet" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe
+              class="embed"
+              src="https://open.spotify.com/embed/playlist/4WiFq0QFPIY9cWhhTAOD5i?utm_source=generator"
+              title="Spotify de Michel Fontanet"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
           </article>
 
           <article class="media-card">
-  <h3>Portafolio profesional</h3>
+            <h3>Portafolio profesional</h3>
 
-  <a href="https://www.canva.com/design/DAF-Sz6B-0U/ADf0R4cPio1iORzcYqDxyg/edit"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="portfolio-link"
-     style="display:block; margin-top:18px;">
-
-    <img
-      src="assets/portfolio-preview.jpg"
-      alt="Portafolio de Michel Fontanet"
-      class="embed portfolio-preview"
-      style="object-fit:cover;"
-    />
-  </a>
-</article>
+            <a
+              href="https://www.canva.com/design/DAF-Sz6B-0U/ADf0R4cPio1iORzcYqDxyg/edit"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="portfolio-link"
+              style="display:block; margin-top:18px;"
+            >
+              <img
+                src="assets/portfolio-preview.jpg"
+                alt="Portafolio de Michel Fontanet"
+                class="embed portfolio-preview"
+                style="object-fit:cover;"
+              />
+            </a>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-  <div class="container">
-    <div class="footer-box">
+    <div class="container">
+      <div class="footer-box">
+        <h3>Michel Fontanet</h3>
 
-      <h3>Michel Fontanet</h3>
+        <p style="margin-top: 8px;">
+          Mi historia, mis plataformas oficiales y apoyo a mi sueño.
+        </p>
 
-      <p style="margin-top: 8px;">
-        Mi historia, mis plataformas oficiales y apoyo a mi sueño.
-      </p>
-
-      <p style="opacity:.6; font-size:13px; margin-top:16px;">
-        Sitio creado para apoyar este proyecto — desarrollo por Lautaro Antúnez.
-      </p>
-
+        <p style="opacity:.6; font-size:13px; margin-top:16px;">
+          Sitio creado para apoyar este proyecto — desarrollo por Lautaro Antúnez.
+        </p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
+  <script>
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      textarea.style.pointerEvents = 'none';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+
+      let ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch (e) {
+        ok = false;
+      }
+
+      document.body.removeChild(textarea);
+      return ok;
+    }
+
+    async function copyField(textId, button, successText, defaultText) {
+      const el = document.getElementById(textId);
+      if (!el) return;
+
+      const value = el.textContent.trim();
+      let copied = false;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(value);
+          copied = true;
+        } catch (e) {
+          copied = fallbackCopy(value);
+        }
+      } else {
+        copied = fallbackCopy(value);
+      }
+
+      if (copied) {
+        const old = button.textContent;
+        button.textContent = successText;
+        button.classList.add('is-copied');
+
+        setTimeout(() => {
+          button.textContent = defaultText || old;
+          button.classList.remove('is-copied');
+        }, 1800);
+      } else {
+        button.textContent = 'No se pudo copiar';
+        setTimeout(() => {
+          button.textContent = defaultText;
+        }, 1800);
+      }
+    }
+  </script>
 </body>
 </html>
